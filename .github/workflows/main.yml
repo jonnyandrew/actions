@@ -4,6 +4,13 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      fruit:
+        type: choice
+        options: 
+        - apple
+        - banana
+      
 
 jobs:
   hello-world:
@@ -15,3 +22,13 @@ jobs:
       - name: Hello, world
         run: echo "Hello, world"
         shell: bash
+  inputs:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inputs
+        run: |
+          echo "Workflow input is ${{ inputs.fruit }}"
+          echo "Job environment variable FRUIT=$FRUIT"
+        shell: bash
+        env:
+          FRUIT: ${{ inputs.fruit || 'coconut' }}
