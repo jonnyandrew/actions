@@ -7,10 +7,9 @@ on:
     inputs:
       fruit:
         type: choice
-        options: 
-        - apple
-        - banana
-      
+        options:
+          - apple
+          - banana
 
 jobs:
   hello-world:
@@ -29,3 +28,9 @@ jobs:
         shell: bash
         env:
           FRUIT: ${{ inputs.fruit || 'coconut' }}
+  kotlin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Kotlin script
+        run: kotlin scripts/hello-world.kts
+        shell: bash
