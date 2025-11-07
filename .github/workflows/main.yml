@@ -25,11 +25,13 @@ jobs:
     steps:
       - name: Inputs
         run: |
-          echo "Workflow input is ${{ inputs.fruit }}"
           echo "Job environment variable FRUIT=$FRUIT"
+          echo "Workflow input is ${{ inputs.fruit }}"
+          echo "Job environment variable IS_WORKFLOW_DISPATCH=$IS_WORKFLOW_DISPATCH"
         shell: bash
         env:
           FRUIT: ${{ inputs.fruit || 'coconut' }}
+          IS_WORKFLOW_DISPATCH: ${{ github.event == 'workflow_dispatch' }}
 
   kotlin:
     runs-on: ubuntu-latest
