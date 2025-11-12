@@ -1,0 +1,13 @@
+name: Manual trigger
+on:
+  workflow_dispatch:
+
+jobs:
+
+  log-ref-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log GITHUB_REF_NAME
+        run: echo "$GITHUB_REF_NAME"
+        shell: bash
+

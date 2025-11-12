@@ -1,0 +1,14 @@
+name: Chained
+on:
+  workflow_run:
+    workflows: [Manual trigger]
+
+jobs:
+
+  log-ref-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log GITHUB_REF_NAME
+        run: echo "$GITHUB_REF_NAME"
+        shell: bash
+
