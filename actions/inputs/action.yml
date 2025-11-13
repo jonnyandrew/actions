@@ -10,7 +10,7 @@ runs:
   using: "composite"
   steps:
     - name: Log not-required input
-      run: echo "not-required: ${NOT_REQUIRED}"
+      run: echo "not-required: $NOT_REQUIRED"
       shell: bash
       env:
         NOT_REQUIRED: ${{ inputs.not-required }}
