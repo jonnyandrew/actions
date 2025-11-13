@@ -1,0 +1,18 @@
+name: 'Action with inputs'
+description: 'Action with inputs'
+
+inputs:
+  not-required:
+    type: string
+    description: 'An input thats not requred'
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Log not-required input
+      run: echo "not-required: ${NOT_REQUIRED}"
+      shell: bash
+      env:
+        NOT_REQUIRED: ${{ inputs.not-required }}
+

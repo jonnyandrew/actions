@@ -31,7 +31,13 @@ jobs:
         shell: bash
         env:
           FRUIT: ${{ inputs.fruit || 'coconut' }}
-          IS_WORKFLOW_DISPATCH: ${{ github.event == 'workflow_dispatch' }}
+          IS_WORKFLOW_DISPATCH: ${{ github.event_name == 'workflow_dispatch' }}
+
+  inputs-composite:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inputs composite
+        uses: ./actions/inputs
 
   kotlin:
     runs-on: ubuntu-latest
