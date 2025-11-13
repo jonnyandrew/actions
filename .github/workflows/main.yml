@@ -38,8 +38,6 @@ jobs:
 
       - name: Inputs composite
         uses: ./actions/inputs
-        with:
-          not-required: 'given'
 
   kotlin:
     runs-on: ubuntu-latest
