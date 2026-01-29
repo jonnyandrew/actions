@@ -1,0 +1,17 @@
+name: Protected deploy
+on:
+  workflow_dispatch:
+
+jobs:
+
+  protected-deploy:
+    name: Protected deploy
+
+    environment: deploy # The deploy environment needs approval
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        run: echo "Deployment approved!"
+        shell: bash
+
