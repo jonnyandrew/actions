@@ -24,6 +24,10 @@ jobs:
           path: /home/linuxbrew/.linuxbrew
           key: homebrew-${{ steps.cache-key.outputs.key }}
 
+      - name: Cache status
+        run: echo "Cache hit=${{ steps.cache.outputs.cache-hit }}" >&2
+        shell: bash
+
       - name: Add Linuxbrew to PATH
         run: |
           echo "/home/linuxbrew/.linuxbrew/bin" >> "$GITHUB_PATH"
