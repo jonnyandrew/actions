@@ -1,0 +1,48 @@
+name: Brew cache
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  brew-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set cache key
+        id: cache-key
+        run: |
+          WEEK=$(date +%Y-%V)
+          echo "week=$WEEK" >&2
+          echo "key=homebrew-${{ runner.os }}-$WEEK" >> "$GITHUB_OUTPUT"
+        shell: bash
+
+      - name: Restore Linuxbrew cache
+        id: cache
+        uses: actions/cache@v4
+        with:
+          path: /home/linuxbrew/.linuxbrew
+          key: homebrew-${{ steps.cache-key.outputs.key }}
+
+      - name: Cache status
+        run: echo "Cache hit=${{ steps.cache.outputs.cache-hit }}" >&2
+        shell: bash
+
+      - name: Add Linuxbrew to PATH
+        run: |
+          echo "/home/linuxbrew/.linuxbrew/bin" >> "$GITHUB_PATH"
+          echo "Added Linuxbrew to PATH" >&2
+        shell: bash
+
+      - name: Install vale
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          echo "Cache miss — installing vale" >&2
+          brew install vale
+        shell: bash
+
+      - name: Run vale
+        run: |
+          echo "Linuxbrew path: $(brew --prefix)" >&2
+          vale --version
+        shell: bash
