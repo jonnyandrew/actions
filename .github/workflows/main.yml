@@ -48,3 +48,19 @@ jobs:
       - name: Kotlin script
         run: scripts/hello-world.kts
         shell: bash
+
+  approval:
+    runs-on: ubuntu-latest
+    environment: approval
+    steps:
+      - name: Approval gate
+        run: echo "Approved"
+        shell: bash
+
+  release:
+    runs-on: ubuntu-latest
+    environment: release
+    steps:
+      - name: Release
+        run: echo "Release"
+        shell: bash
