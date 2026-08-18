@@ -58,6 +58,7 @@ jobs:
         shell: bash
 
   release:
+    needs: approval
     runs-on: ubuntu-latest
     environment: release
     steps:
